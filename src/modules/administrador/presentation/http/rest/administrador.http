@@ -1,0 +1,43 @@
+@host = localhost
+@port = 3000
+@apiversion = api/v1
+
+
+
+### Registrar Um Novo Administrador
+POST http://{{host}}:{{port}}/{{apiversion}}/administradores
+Content-type: application/json
+
+{
+    "nome":"testez",
+    "email":"testez@gmail.com",
+    "senha":"123456789",
+    "tipo": "ADMGERAL"
+}
+
+### Autenticar Um Usuário Existente a Partir das Credenciais
+POST http://{{host}}:{{port}}/{{apiversion}}/administradores/autenticacao
+Content-type: application/json
+
+{
+    "email":"testez@gmail.com",
+    "senha":"123456789"
+}
+
+### Recuperar Um Conteudo por ID
+GET http://{{host}}:{{port}}/{{apiversion}}/administradores/7f099302-0942-4b73-af71-bec1d8ee9625
+
+### Atualizar Administrador
+PUT http://{{host}}:{{port}}/{{apiversion}}/administradores/7f099302-0942-4b73-af71-bec1d8ee9625
+Content-type: application/json 
+
+{
+    "id": "7f099302-0942-4b73-af71-bec1d8ee9625",
+    "nome":"Teste Adm",
+    "email":"testeadm@gmail.com",
+    "senha":"12345678",
+    "tipo": "ADMGERAL"
+}
+
+### Deletar Administrador
+DELETE http://{{host}}:{{port}}/{{apiversion}}/administradores/7f099302-0942-4b73-af71-bec1d8ee9625

@@ -1,0 +1,43 @@
+@host = localhost
+@port = 3000
+@apiversion = api/v1
+
+### Recuperar Uma Liturgia por ID
+GET http://{{host}}:{{port}}/{{apiversion}}/liturgias/014e7c02-5d13-4793-b500-bb5d7b5796d8
+
+### Recuperar Todas as liturgias
+GET http://{{host}}:{{port}}/{{apiversion}}/liturgias
+
+### Registrar Uma Nova Liturgia
+POST http://{{host}}:{{port}}/{{apiversion}}/liturgias
+Content-type: application/json
+
+{
+    "primeiraLeitura":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "segundaLeitura":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "salmoResponsorial":"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "titulo":"ddddddddddddddddddddddddddddddddd",
+    "evangelho":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "corLiturgica":"Verde",
+    "dia":"24/08/2024"
+}
+
+
+
+### Atualizar Liturgia
+PUT http://{{host}}:{{port}}/{{apiversion}}/liturgias/ae201afd-5baa-40a7-b12f-233c72df1932
+Content-type: application/json 
+
+{
+    "id": "ae201afd-5baa-40a7-b12f-233c72df1932",
+    "primeiraLeitura":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "segundaLeitura":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "salmoResponsorial":"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "titulo":"ddddddddddddddddddddddddddddddddd",
+    "evangelho":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "corLiturgica":"Verde",
+    "dia":"24/08/2024"
+}
+
+### Deletar Liturgia
+DELETE http://{{host}}:{{port}}/{{apiversion}}/liturgiad/ae201afd-5baa-40a7-b12f-233c72df1932

@@ -1,0 +1,27 @@
+@host = localhost
+@port = 3000
+@apiversion = api/v1
+
+
+
+### Registrar Uma Nova Categoria
+POST http://{{host}}:{{port}}/{{apiversion}}/categorias
+Content-type: application/json
+
+{
+    "nome":"Testtt"
+}
+
+
+
+### Atualizar Categoria
+PUT http://{{host}}:{{port}}/{{apiversion}}/categorias/ae201afd-5baa-40a7-b12f-233c72df1932
+Content-type: application/json 
+
+{
+    "id": "ae201afd-5baa-40a7-b12f-233c72df1932",
+    "nome": "Noticias"
+}
+
+### Deletar Categoria
+DELETE http://{{host}}:{{port}}/{{apiversion}}/categorias/ae201afd-5baa-40a7-b12f-233c72df1932

@@ -1,0 +1,1171 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title": "Comunidade Catolica Agape",
+        "description": "Site da Comunidade Catolica Agape",
+        "contact":{
+            "email":"exemplo@gmail.com"
+        },
+        "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url": "http://localhost:3000/api/v1",
+            "description": "API de produção"
+        }
+    ],
+    "paths":{
+        "/administradores":{
+            "post":{
+                "summary": "cria administrador",
+                "description": "essa rota cria administrador no sistema",
+                "tags": ["Administradores"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Administrador"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "nome": "Marcio Santos",
+                                        "email": "marciosantos@gmail.com",
+                                        "tipo": "ADMGERAL",
+                                        "senha": "123456789"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Adm não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todos os administradores",
+                "summary": "Busca de Administradores",
+                "tags": ["Administradores"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administradores/{id}":{
+            "get":{
+                "description": "Busca de Administrador Por Id",
+                "summary": "Busca de Administrador Por Id",
+                "tags": ["Administradores"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Busca de Administrador Por Id",
+                        "required": "true"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "description": "Alteração de Administrador Por Id",
+                "summary": "Alteração de Administrador Por Id",
+                "tags": ["Administradores"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Busca de Administrador Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Administrador"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "id": "3279b498-3542-4bc8-87a4-8174a5bbcf51",
+                                        "nome": "Douglas Santos",
+                                        "email": "douglassantos@gmail.com",
+                                        "tipo": "ADMGERAL",
+                                        "senha": "123456789"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta um Administrador Por Id",
+                "summary": "Deletar Administrador",
+                "tags": ["Administradores"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Administrador a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Administrador deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Administrador não encontrado"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/administradores/autenticacao":{
+            "post":{
+                "summary": "autenticar administrador",
+                "description": "essa rota autentica administrador no sistema",
+                "tags": ["Administradores"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/AdministradorAuth"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "email": "marciosantos@gmail.com",
+                                        "senha": "123456789"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Adm não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorias":{
+            "post":{
+                "summary": "cria categoria",
+                "description": "essa rota cria categoria no sistema",
+                "tags": ["Categorias"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Categoria"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "nome": "Igreja"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Categoria não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todas as categorias",
+                "summary": "Busca de Categorias",
+                "tags": ["Categorias"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorias/editar/{id}":{
+            "put":{
+                "description": "Alteração de Categoria Por Id",
+                "summary": "Alteração de Categoria Por Id",
+                "tags": ["Categorias"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alteração de Categoria Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Categoria"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "id": "eba19ec3-95c6-4151-bbed-4cfd70f8b318",
+                                        "nome": "Comunidade"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorias/{id}":{
+            "delete": {
+                "description": "Deleta uma Categoria Por Id",
+                "summary": "Deletar Categoria",
+                "tags": ["Categorias"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da Categoria a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoria deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/conteudos":{
+            "post":{
+                "summary": "cria conteudo",
+                "description": "essa rota cria conteudo no sistema",
+                "tags": ["Conteudos"],
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "$ref": "#components/schemas/Conteudo"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "titulo": "Conteudo Teste",
+                                        "descricao": "Conteudo Teste Swagger",
+                                        "categoria": "b66f7487-5a00-4739-a18b-b4a97f9229a0",
+                                        "autor": "Autor Teste",
+                                        "banner": "uploads/1726688987751.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Conteudo não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Conteudo"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todos os conteudos",
+                "summary": "Busca de Conteudos",
+                "tags": ["Conteudos"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Conteudo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/conteudos/editar/{id}":{
+            "put":{
+                "description": "Alteração de Conteudo Por Id",
+                "summary": "Alteração de Conteudo Por Id",
+                "tags": ["Conteudos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alteração de Conteudo Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "$ref": "#components/schemas/Conteudo"
+                            },
+                            "examples":{
+                                "Conteudo Exemplo":{
+                                    "value":{
+                                        "id": "4e3ee184-fdd4-46c5-8663-540aafa9feac",
+                                        "titulo": "teste noticia editado 4",
+                                        "descricao": "testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        "categoria": "b66f7487-5a00-4739-a18b-b4a97f9229a0",
+                                        "autor":"Cristiano Ronaldo",
+                                        "banner":"uploads/1726688987751.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Conteudo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/conteudos/{id}":{
+            "get":{
+                "description": "Busca de Conteudo Por Id",
+                "summary": "Busca de Conteudo Por Id",
+                "tags": ["Conteudos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Busca de Conteudo Por Id",
+                        "required": "true"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Conteudo"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta um Conteudo Por Id",
+                "summary": "Deletar Conteudo",
+                "tags": ["Conteudos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Conteudo a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Conteudo deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Conteudo não encontrado"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/eventos":{
+            "post":{
+                "summary": "cria evento",
+                "description": "essa rota cria evento no sistema",
+                "tags": ["Eventos"],
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "$ref": "#components/schemas/Evento"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "titulo":"teste evento edição",
+                                        "descricao": "testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        "local": "Tobias Barreto",
+                                        "data": "04/05/2003",
+                                        "horario": "22:00",
+                                        "banner":"uploads/1726343502878.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Evento não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todos os eventos",
+                "summary": "Busca de Eventos",
+                "tags": ["Eventos"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/eventos/editar/{id}":{
+            "put":{
+                "description": "Alteração de Evento Por Id",
+                "summary": "Alteração de Evento Por Id",
+                "tags": ["Eventos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alteração de Evento Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "$ref": "#components/schemas/Evento"
+                            },
+                            "examples":{
+                                "Evento Exemplo":{
+                                    "value":{
+                                        "id": "bdd88ea0-f05d-47f7-a4f8-7d05d456a0e0",
+                                        "titulo":"teste evento edição",
+                                        "descricao": "testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        "local": "Tobias Barreto",
+                                        "data": "04/05/2003",
+                                        "horario": "22:00",
+                                        "banner":"uploads/1726343502878.jpg"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/eventos/{id}":{
+            "get":{
+                "description": "Busca de Evento Por Id",
+                "summary": "Busca de Evento Por Id",
+                "tags": ["Eventos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Busca de Evento Por Id",
+                        "required": "true"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Evento"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta um Evento Por Id",
+                "summary": "Deletar Evento",
+                "tags": ["Eventos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Evento a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Evento não encontrado"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/inscricoes":{
+            "post":{
+                "summary": "cria inscricao",
+                "description": "essa rota cria inscricao no sistema",
+                "tags": ["Inscricoes"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/inscricao"
+                            },
+                            "examples":{
+                                "administrador":{
+                                    "value":{
+                                        "nome":"Deivid Pontes",
+                                        "email":"seila@gmail.com",
+                                        "grupo":"grupo A",
+                                        "setor":"setor B",
+                                        "eventId":"bdd88ea0-f05d-47f7-a4f8-7d05d456a0e0",
+                                        "telefone":"79996531050",
+                                        "idade":21
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Inscricao não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Inscricao"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todos as inscricoes",
+                "summary": "Busca de Inscricoes",
+                "tags": ["Inscricoes"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Inscricao"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/inscricoes/{id}":{
+            "put":{
+                "description": "Alteração de Inscricao Por Id",
+                "summary": "Alteração de Inscricao Por Id",
+                "tags": ["Inscricoes"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alteração de Inscricao Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Inscricao"
+                            },
+                            "examples":{
+                                "Conteudo Exemplo":{
+                                    "value":{
+                                        "id": "ae201afd-5baa-40a7-b12f-233c72df1932",
+                                        "nome":"Deivid Pontes",
+                                        "email":"dd@gmail.com",
+                                        "grupo":"grupo A",
+                                        "setor":"setor B",
+                                        "eventId":"ladjsduisdauruieyuryuidyruidryruidyruisd",
+                                        "telefone":"79996531050",
+                                        "idade":21
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Inscricao"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta uma Inscricao Por Id",
+                "summary": "Deletar Inscricao",
+                "tags": ["Inscricoes"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da Inscricao a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Inscricao deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Inscricao não encontrada"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            }
+        },
+        "/liturgias":{
+            "post":{
+                "summary": "cria liturgia",
+                "description": "essa rota cria liturgia no sistema",
+                "tags": ["Liturgias"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Liturgia"
+                            },
+                            "examples":{
+                                "liturgia 24/08/2024":{
+                                    "value":{
+                                        "primeiraLeitura":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                        "segundaLeitura":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                                        "salmoResponsorial":"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                                        "titulo":"ddddddddddddddddddddddddddddddddd",
+                                        "evangelho":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        "corLiturgica":"Verde",
+                                        "dia":"24/08/2024"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400":{
+                        "description": "Liturgia não existe"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Liturgia"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "description": "Buscar todas as liturgias",
+                "summary": "Busca de Liturgias",
+                "tags": ["Liturgias"],
+                
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Liturgia"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/liturgias/{id}":{
+            "put":{
+                "description": "Alteração de Liturgia Por Id",
+                "summary": "Alteração de Liturgia Por Id",
+                "tags": ["Liturgias"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alteração de Liturgia Por Id",
+                        "required": "true"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#components/schemas/Liturgia"
+                            },
+                            "examples":{
+                                "Liturgia Exemplo":{
+                                    "value":{
+                                        "id": "ae201afd-5baa-40a7-b12f-233c72df1932",
+                                        "primeiraLeitura":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                                        "segundaLeitura":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                                        "salmoResponsorial":"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                                        "titulo":"ddddddddddddddddddddddddddddddddd",
+                                        "evangelho":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                                        "corLiturgica":"Verde",
+                                        "dia":"24/08/2024"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Liturgia"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deleta uma Liturgia Por Id",
+                "summary": "Deletar Liturgia",
+                "tags": ["Liturgias"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da Liturgia a ser deletada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liturgia deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Liturgia não encontrada"
+                    },
+                    "401": {
+                        "description": "Não Autorizado"
+                    }
+                }
+            },
+            "get":{
+                "description": "Busca de Liturgia Por Id",
+                "summary": "Busca de Liturgia Por Id",
+                "tags": ["Liturgias"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Busca de Liturgia Por Id",
+                        "required": "true"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#components/schemas/Liturgia"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Administrador":{
+                "type": "object",
+                "properties":{
+                    "nome":{
+                        "type": "string"
+                    },
+                    "email":{
+                        "type": "string"
+                    },
+                    "tipo":{
+                        "type": "string",
+                        "enum": [
+                        "ADMGERAL",
+                        "ADMEVENTOS",
+                        "ADMLITURGIA",
+                        "ADMEVENTOS_E_CONTEUDOS",
+                        "ADMEVENTOS_CONTEUDOS_E_LITURGIA",
+                        "ADMEVENTOS_E_LITURGIA",
+                        "ADMCONTEUDOS_E_LITURGIA"
+                        ]
+                    },
+                    "senha":{
+                        "type": "string"
+                    }
+                }
+            },
+            "AdministradorAuth": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    }
+                },
+                "required": ["email", "senha"]
+            },
+            "Categoria":{
+                "type": "object",
+                "properties":{
+                    "nome":{
+                        "type": "string"
+                    }
+                }
+            },
+            "Conteudo":{
+                "type": "object",
+                "properties":{
+                    "id":{
+                        "type": "string"
+                    },
+                    "titulo":{
+                        "type": "string"
+                    },
+                    "descricao":{
+                        "type": "string"
+                    },
+                    "categoria":{
+                        "type": "string"
+                    },
+                    "autor":{
+                        "type": "string"
+                    },
+                    "banner": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "Evento":{
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "type": "string"
+                    },
+                    "titulo":{
+                        "type": "string"
+                    },
+                    "descricao":{
+                        "type": "string"
+                    },
+                    "local":{
+                        "type": "string"
+                    },
+                    "data":{
+                        "type": "string"
+                    },
+                    "horario":{
+                        "type": "string"
+                    },
+                    "banner": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "Inscricao":{
+                "type": "object",
+                "properties":{
+                    "nome":{
+                        "type": "string"
+                    },
+                    "email":{
+                        "type": "string"
+                    },
+                    "grupo":{
+                        "type": "string"
+                    },
+                    "setor":{
+                        "type": "string"
+                    },
+                    "eventId":{
+                        "type": "string"
+                    },
+                    "telefone":{
+                        "type": "string"
+                    },
+                    "idade":{
+                        "type": "number"
+                    }
+                }
+            },
+            "Liturgia":{
+                "type": "object",
+                "properties":{
+                    "primeiraLeitura":{
+                        "type": "string"
+                    },
+                    "segundaLeitura":{
+                        "type": "string"
+                    },
+                    "salmoResponsorial":{
+                        "type": "string"
+                    },
+                    "titulo":{
+                        "type": "string"
+                    },
+                    "evangelho":{
+                        "type": "string"
+                    },
+                    "corLiturgica":{
+                        "type": "string"
+                    },
+                    "dia":{
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

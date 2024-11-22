@@ -1,0 +1,37 @@
+@host = localhost
+@port = 3000
+@apiversion = api/v1
+
+### Recuperar Um Conteudo por ID
+GET http://{{host}}:{{port}}/{{apiversion}}/conteudos/e6513775-bc2f-4551-bbc7-9d7131d07e1c
+
+### Recuperar Todos os Conteudos
+GET http://{{host}}:{{port}}/{{apiversion}}/conteudos
+
+### Inserir Um Conteudo
+POST http://{{host}}:{{port}}/{{apiversion}}/conteudos
+Content-type: application/json
+
+{
+    "titulo":"Teste do Back End Mesmo",
+    "descricao":"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "categoria": "010be3a1-8b33-401d-b063-5cbfc8ef64af",
+    "autor":"David Pontes",
+    "banner":"uploads/1727035086018.jpg"
+}
+
+### Atualizar Conteudo
+PUT http://{{host}}:{{port}}/{{apiversion}}/conteudos/75d24231-ce51-450f-8871-d0d6f34b66f0
+Content-type: application/json 
+
+{
+    "id": "75d24231-ce51-450f-8871-d0d6f34b66f0",
+    "titulo":"Sala de Estar Né",
+    "descricao":"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "categoria":"NOTICIA",
+    "autor":"Deivid Pontes",
+    "banner":"https://aajajajjaja.com"
+}
+
+### Deletar Conteudo
+DELETE http://{{host}}:{{port}}/{{apiversion}}/conteudos/b1ede26d-b611-4f53-b8d9-3976d3464865

@@ -1,0 +1,42 @@
+@host = localhost
+@port = 3000
+@apiversion = api/v1
+
+
+### Recuperar Todas as Inscricoes
+GET http://{{host}}:{{port}}/{{apiversion}}/inscricoes
+
+
+### Registrar Uma Nova Inscrição
+POST http://{{host}}:{{port}}/{{apiversion}}/inscricoes
+Content-type: application/json
+
+{
+    "nome":"Deivid Pontes",
+    "email":"seila@gmail.com",
+    "grupo":"grupo São Bento",
+    "setor":"setor B",
+    "eventId":"bdd88ea0-f05d-47f7-a4f8-7d05d456a0e0",
+    "telefone":"79996531050",
+    "idade":15
+}
+
+
+
+### Atualizar Inscrição
+PUT http://{{host}}:{{port}}/{{apiversion}}/inscricoes/ae201afd-5baa-40a7-b12f-233c72df1932
+Content-type: application/json 
+
+{
+    "id": "ae201afd-5baa-40a7-b12f-233c72df1932",
+    "nome":"Deivid Pontes",
+    "email":"dd@gmail.com",
+    "grupo":"grupo A",
+    "setor":"setor B",
+    "eventId":"ladjsduisdauruieyuryuidyruidryruidyruisd",
+    "telefone":"79996531050",
+    "idade":21
+}
+
+### Deletar Inscrição
+DELETE http://{{host}}:{{port}}/{{apiversion}}/inscricoes/ae201afd-5baa-40a7-b12f-233c72df1932
