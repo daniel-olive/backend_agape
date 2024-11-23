@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -10,6 +11,7 @@ import { errorResponder } from "./middlewares/error-responser.middleware";
 
 import fs from "fs";
 import swaggerDocs from "./swagger.json";
+import compression from "compression";
 
 const swaggerUi = require("swagger-ui-express");
 
@@ -21,6 +23,17 @@ app.use(helmet()); //O Helmet proteger o seu aplicativo de algumas vulnerabilida
 app.use(express.json()); //Configura o cabeçalho de resposta tornar as resposta da API em JSON.
 app.use(express.urlencoded({ extended: true })); //Lida com dados de requisição, exemplo pega o body em qualquer requisição, não apenas no POST./
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(compression());
+app.use(
+    cors({
+        origin: ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5400", "http://127.0.0.1:5400", "http://localhost:3000"],
+        optionsSuccessStatus: 200,
+    })
+);
+app.use((req, res, next) => {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    next();
+});
 
 app.get("/main", (req, res) => {
     res.json({ rota: "main" });
